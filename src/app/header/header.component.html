@@ -1,3 +1,26 @@
-<p>
-header works!
-</p>
+<mat-toolbar>
+  <a routerLink="/home" class="logo">
+    <button mat-button>Internationalization</button>
+  </a>
+
+  <a routerLink="/home" routerLinkActive="active">
+    <button mat-button>Home</button>
+  </a>
+
+  <a routerLink="/about" routerLinkActive="active">
+    <button mat-button>About</button>
+  </a>
+
+  <span class="spacer"></span>
+
+  <button mat-button [matMenuTriggerFor]="menu" class="selected-language">
+    <span class="fi fi-{{detectedLocale | slice:3:5 | lowercase}}"></span> {{detectedLocale | slice:0:2 | uppercase}}
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let l of locales" (click)="onLocalization(l.value)">
+      <span class="fi fi-{{l.value | slice:3:5 | lowercase}}"></span> {{l.label}}
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
